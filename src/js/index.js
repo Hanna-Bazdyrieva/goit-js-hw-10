@@ -18,7 +18,7 @@ function renderList(countries) {
   const markup = countries
     .map(
       ({ flags, name }) =>
-        `<div><img src="${flags.svg}" alt="${name.official}" width= 20><h2 class="country-name country-name__list">${name.official}</h2></div>`
+        `<li><img src="${flags.svg}" alt="${name.official}" width= 20><h2 class="country-name country-name__list">${name.official}</h2></li>`
     )
     .join('');
   getRefs().list.innerHTML = markup;

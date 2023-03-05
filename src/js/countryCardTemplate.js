@@ -3,7 +3,7 @@ function countryCardTemplate(countries) {
     .map(({ flags, name, capital, languages, population }) => {
       const lang = Object.values(languages).join(',  ');
       return `<div class="country-card">
-  <img src="${flags.svg}" alt="${name.official}" width= 50>
+  <img src="${flags.svg}" alt="${name.official}">
 <h2 class="country-name">${name.official}</h2>
 <p class="country-capital">Capital:  <span>${capital}</span></p>
 <p class="country-population">Population:  <span>${population.toLocaleString()}</span></p>
