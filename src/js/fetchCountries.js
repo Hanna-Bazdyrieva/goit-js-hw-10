@@ -3,11 +3,11 @@ import getRefs from './getRefs';
 
 // const BASE_URL = 'https:/restcountries.com/v3.1';
 
-function fetchCountries(name) {
+function fetchCountries(country) {
   getRefs().list.innerHTML = '';
   getRefs().info.innerHTML = '';
   return fetch(
-    `https:/restcountries.com/v3.1/name/${name}?fields=name,capital,population,flags,languages`
+    `https:/restcountries.com/v3.1/name/${country}?fields=name,capital,population,flags,languages`
   )
     .then(response => {
       if (!response.ok) {
