@@ -31,7 +31,11 @@ function onSearch(e) {
   if (country !== '') {
     fetchCountries(country)
       .then(countries => {
+        console.log('onSearch -> countries:', countries);
+
         const number = countries.length;
+        console.log('onSearch -> number:', number);
+
         if (number > 10) {
           Notify.info(
             'Too many matches found. Please enter a more specific name.'
