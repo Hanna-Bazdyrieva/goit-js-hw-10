@@ -18,3 +18,42 @@ body {
   max-width: 320px;
   margin-bottom: 16px;
 }
+h2 {
+  font-size: 30px;
+  display: inline-block;
+  margin: 4px 0 4px 10px;
+}
+img {
+  border: 1px solid gray;
+}
+p {
+  margin: 4px 0 4px 15px;
+  font-size: 20px;
+
+  font-weight: 700;
+}
+span {
+  font-weight: 400;
+  font-size: 20px;
+}
+
+.country-card {
+  width: 500px;
+  padding: 20px;
+  background-color: rgb(241, 234, 212);
+  border: 1px dotted gray;
+  border-radius: 20px;
+  box-shadow: 10px 10px 12px 1px rgba(0, 0, 0, 0.56);
+  -webkit-box-shadow: 10px 10px 12px 1px rgba(0, 0, 0, 0.56);
+  -moz-box-shadow: 10px 10px 12px 1px rgba(0, 0, 0, 0.56);
+}
+
+.country-name__list {
+  font-size: 16px;
+  margin: 4px 0 4px 10px;
+}
+
+body {
+  background-repeat: no-repeat;
+  background-size: 100vw 100vh;
+}
