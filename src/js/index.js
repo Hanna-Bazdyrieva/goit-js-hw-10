@@ -13,53 +13,61 @@ const refs = getRefs();
 refs.input.addEventListener('input', debounce(onSearch, DEBOUNCE_DELAY));
 
 function renderList(countries) {
-  getRefs().info.innerHTML = '';
-  getRefs().list.innerHTML = '';
-  const markup = countries
-    .map(
-      ({ flags, name }) =>
-        `<li><img src="${flags.svg}" alt="${name.official}" width= 20><h2 class="country-name country-name__list">${name.official}</h2></li>`
-    )
-    .join('');
-  getRefs().list.innerHTML = markup;
+  clearMarkup(refs.info);
+  clearMarkup(refs.list);
+  refs.list.insertAdjacentHTML('beforeend', setListMarkup(countries));
 }
 
 function onSearch(e) {
-  refs.body.style.backgroundImage = '';
+  removeBodyBackgroundImage();
 
   const country = e.target.value.trim();
   if (country !== '') {
+    clearMarkup(refs.info);
+    clearMarkup(refs.list);
     fetchCountries(country)
       .then(countries => {
-        console.log('onSearch -> countries:', countries);
-
-        const number = countries.length;
-        console.log('onSearch -> number:', number);
-
-        if (number > 10) {
-          Notify.info(
+        const countriesNumber = countries.length;
+        if (countriesNumber > 10) {
+          showNotifyInfo(
             'Too many matches found. Please enter a more specific name.'
           );
         } else {
           renderList(countries);
         }
-        if (number === 1) {
+        if (countriesNumber === 1) {
+          clearMarkup(refs.list);
           renderCountryCard(countries);
-          refs.body.style.backgroundImage = `url(${countries[0].flags.svg})`;
+          setBodyBackgroundImage(countries);
         }
       })
       .catch(error => console.log(error));
   } else {
-    getRefs().list.innerHTML = '';
-    getRefs().info.innerHTML = '';
+    clearMarkup(refs.list);
+    clearMarkup(refs.info);
   }
 }
 
 function renderCountryCard(countries) {
-  refs.list.innerHTML = '';
-
-  const markup = countryCardTemplate(countries);
-  console.log('fetchCountries -> markup:', markup);
-
-  refs.info.innerHTML = markup;
+  refs.info.insertAdjacentHTML('beforeend', countryCardTemplate(countries));
+}
+function setListMarkup(countries) {
+  return countries
+    .map(
+      ({ flags, name }) =>
+        `<li><img src="${flags.svg}" alt="${name.official}" width= 20><h2 class="country-name country-name__list">${name.official}</h2></li>`
+    )
+    .join('');
+}
+function clearMarkup(el) {
+  return (el.innerHTML = '');
+}
+function setBodyBackgroundImage(country) {
+  refs.body.style.backgroundImage = `url(${country[0].flags.svg})`;
+}
+function removeBodyBackgroundImage() {
+  refs.body.style.backgroundImage = '';
+}
+function showNotifyInfo(message) {
+  Notify.info(message);
 }
